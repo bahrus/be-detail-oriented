@@ -6,6 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "dependencies": {
+    "be-decorated": "0.0.198",
+    "be-hive": "0.0.77"
+  },
+  "devDependencies": {
+    "may-it-serve": "0.0.4",
+    "@playwright/test": "1.27.1",
+    "@skypack/package-check": "0.2.2"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bahrus/be-detail-oriented.git"

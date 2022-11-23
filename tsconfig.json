@@ -1,0 +1,19 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module":"ESNext",
+		"sourceMap": false,
+		"experimentalDecorators": false,
+		"newLine": "LF",
+		"strict": true,
+		"watch": true
+	},
+	"files":[
+		"be-detail-oriented.ts"
+	],
+	"exclude":[
+		"build",
+		"node_modules",
+	]
+
+}
