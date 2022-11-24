@@ -1,11 +1,28 @@
 {
   "name": "be-detail-oriented",
   "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Make the fieldset and possibly other built-in elements expandable, similar to the detail element.",
+  "main": "be-detail-oriented.js",
+  "module": "be-detail-oriented.js",
+  "exports": {
+    ".": "./be-detail-oriented.js",
+    "./be-detail-oriented.js": "./be-detail-oriented.js"
+  },
+  "files": [
+    "*.*"
+  ],
+  "types": "types.d.ts",
+  "keywords": [
+    "web-components",
+    "web-component",
+    "custom-element",
+    "custom-elements",
+    "until-found"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "node node_modules/may-it-serve/serve.js"
+    "test": "playwright test",
+    "serve": "node node_modules/may-it-serve/serve.js",
+    "package-check": "package-check"
   },
   "dependencies": {
     "be-decorated": "0.0.199",
@@ -21,7 +38,7 @@
     "type": "git",
     "url": "git+https://github.com/bahrus/be-detail-oriented.git"
   },
-  "author": "",
+  "author": "https://mastodon.social/@bahrus",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/bahrus/be-detail-oriented/issues"
