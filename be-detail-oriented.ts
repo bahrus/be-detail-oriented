@@ -92,6 +92,7 @@ define<Proxy & BeDecoratedProps<Proxy, Actions>, Actions>({
     }
 }'
 >
+    <template shadowroot=open>
     <form>
         <button type=button name=expand part=expand aria-label=Expand>
             <svg width="16px" height="16px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-plus-square">
@@ -113,6 +114,7 @@ define<Proxy & BeDecoratedProps<Proxy, Actions>, Actions>({
             display: inline;
         }
     </style>
+   </template>
 </be-detail-oriented-toggle>            
 
                 `,
