@@ -1,6 +1,6 @@
 {
   "name": "be-detail-oriented",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Make the fieldset and possibly other built-in elements expandable, similar to the detail element.",
   "main": "be-detail-oriented.js",
   "module": "be-detail-oriented.js",
