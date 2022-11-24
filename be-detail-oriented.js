@@ -22,12 +22,6 @@ export class BeDetailOriented extends EventTarget {
             instance = document.createElement('be-detail-oriented-toggle');
         }
         summaryEl.appendChild(instance);
-        // const {children} = self;
-        // for(const child of children){
-        //     if(child === summaryEl) continue;
-        //     //child.setAttribute('hidden', 'until-found');
-        //     (<any>child).hidden = 'until-found';
-        // }
         const { inject } = await import('be-decorated/inject.js');
         inject({ mold, tbdSlots: {
                 of: instance
@@ -35,18 +29,13 @@ export class BeDetailOriented extends EventTarget {
         return mold;
     }
     toggleExpander(pp, e) {
-        //console.log({e});
         const { self, summaryElSelector } = pp;
-        console.log({ self });
         const { children } = self;
         const val = e?.detail.value;
         const summaryEl = self.querySelector(summaryElSelector);
         for (const child of children) {
-            console.log({ child, val, summaryElSelector });
             if (child === summaryEl)
                 continue;
-            console.log('passed');
-            //child.setAttribute('hidden', 'until-found');
             if (val) {
                 child.hidden = false;
             }
