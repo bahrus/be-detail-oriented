@@ -5,7 +5,7 @@ import {register} from 'be-hive/register.js';
 const templLookup = new Map<string, HTMLTemplateElement>();
 
 export class BeDetailOriented extends EventTarget implements Actions {
-    addExpander(pp: PP, mold: PPE): PPE {
+    hydrate(pp: PP, mold: PPE): PPE {
         const {summaryElSelector, self, expanderMarkup} = pp;
         let templ = templLookup.get(expanderMarkup!);
         if(templ === undefined){
@@ -23,6 +23,10 @@ export class BeDetailOriented extends EventTarget implements Actions {
             (<any>child).hidden = 'until-found';
         }
         return mold;
+    }
+
+    toggleExpander(pp: ProxyProps): void {
+        
     }
 }
 
@@ -42,12 +46,22 @@ define<Proxy & BeDecoratedProps<Proxy, Actions>, Actions>({
                     <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
                     <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                 </svg>
-                </button>`,
+                </button>
+                <button aria-label=Collapse>
+                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="16px" height="16px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve">
+<g>
+	<line fill="none" stroke="#000000" stroke-width="4" stroke-miterlimit="10" x1="14" y1="31" x2="50" y2="31"/>
+</g>
+<rect x="1" y="1" fill="none" stroke="#000000" stroke-width="6" stroke-miterlimit="10" width="62" height="62"/>
+</svg>
+                </button>
+                `,
                 summaryElSelector: '*',
             }
         },
         actions:{
-            addExpander: {
+            hydrate: {
                 ifAllOf: ['expanderMarkup', 'summaryElSelector'],
             }
         }

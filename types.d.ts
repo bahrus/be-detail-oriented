@@ -23,6 +23,8 @@ export type PA = Partial<PP>;
 export type PPE = [PA | undefined, EventConfigs<Proxy, Actions>];
 
 export interface Actions{
-    addExpander(pp: PP, returnObjMold: PPE): PPE;
+    hydrate(pp: PP, returnObjMold: PPE): PPE;
+
+    toggleExpander(pp: PP): void;
 }
 
