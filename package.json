@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "be-decorated": "0.0.199",
+    "be-definitive": "0.0.75",
     "be-hive": "0.0.77"
   },
   "devDependencies": {
