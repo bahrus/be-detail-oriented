@@ -7,16 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <div hidden='until-found'>
-        <div style='height:500px'>
-            I am here
-        </div>
-    </div>
-    <details>
-        <summary>hello</summary>
-        <div>this is a test</div>
-    </details>
-
     <form>
         <fieldset be-detail-oriented>
             <legend>legend content</legend>
@@ -24,15 +14,8 @@
                 <label>test</label><input>
             </div>
         </fieldset>
-
-        <fieldset be-detail-oriented>
-            <legend>legend content</legend>
-            <div>
-                <label>test</label><input>
-            </div>
-        </fieldset>
     </form>
-
+    <div id=target></div>
     <script type=importmap>
         {
             "imports": {
@@ -49,6 +32,16 @@
     </script>
     <script type=module>
         import '../be-detail-oriented.js';
+    </script>
+    <script>
+        function runTest(){
+            if(document.querySelector("div:has(label)").hidden){
+                target.setAttribute('mark', 'good');
+            }
+        }
+        setTimeout(() => {
+            runTest();
+        }, 2000);
     </script>
 </body>
 </html>
