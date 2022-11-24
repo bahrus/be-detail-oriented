@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "be-decorated": "0.0.200",
-    "be-definitive": "0.0.76",
+    "be-definitive": "0.0.77",
     "be-hive": "0.0.77"
   },
   "devDependencies": {
