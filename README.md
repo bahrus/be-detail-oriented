@@ -37,3 +37,35 @@ If not using be-detail-oriented as a template instantiation plugin, to avoid FOU
 
 > **Note**:  Chrome (at least) seems to have unexpected behavior when it comes to setting hidden programmatically.  In particular, not wrapping inputs and labels inside a div can prevent the hidden attribute from affecting the display, at least if it's set programmatically.  This buggy (?) behavior can be observed in this [demo](https://codepen.io/bahrus/pen/BaVxWzj).
 
+## Customizability
+
+A number of configuration settings are available to allow customizing how the decorated goes about making itself expandable.
+
+```html
+<form>
+    <fieldset be-detail-oriented>
+        <legend>legend content</legend>
+        <div>
+            <label>test</label><input>
+        </div>
+    </fieldset>
+</form>
+```
+
+is shorthand for:
+
+```html
+<form>
+    <fieldset be-detail-oriented='{
+        "summaryElSelector": "*"
+    }'>
+        <legend>legend content</legend>
+        <div>
+            <label>test</label><input>
+        </div>
+    </fieldset>
+</form>
+```
+
+Meaning, by default, the decorator selects the first child element it finds within, and appends the expander / collapser web component to it. 
+
