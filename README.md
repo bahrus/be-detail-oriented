@@ -35,5 +35,5 @@ If not using be-detail-oriented as a template instantiation plugin, to avoid FOU
 </form>
 ```
 
-> **Note**:  Chrome (at least) seems to have unexpected behavior when it comes to setting hidden programmatically.  In particular, not wrapping inputs and labels inside a div can prevent the hidden attribute from affecting the display, at least if it's set programmatically.  This buggy (?) behavior can be observed in this demo
+> **Note**:  Chrome (at least) seems to have unexpected behavior when it comes to setting hidden programmatically.  In particular, not wrapping inputs and labels inside a div can prevent the hidden attribute from affecting the display, at least if it's set programmatically.  This buggy (?) behavior can be observed in this [demo](https://codepen.io/bahrus/pen/BaVxWzj).
 
