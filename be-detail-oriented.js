@@ -141,7 +141,7 @@ define({
                     { toggleExpander: {
                             on: 'expanded-changed',
                             of: "tbd",
-                            //doInit: true,
+                            doInit: true,
                         } }
                 ]
             }

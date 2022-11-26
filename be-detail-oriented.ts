@@ -145,7 +145,7 @@ define<Proxy & BeDecoratedProps<Proxy, Actions>, Actions>({
                     {toggleExpander: {
                         on: 'expanded-changed',
                         of: "tbd",
-                        //doInit: true,
+                        doInit: true,
                     }}
                 ]
             }
