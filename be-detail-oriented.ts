@@ -8,6 +8,9 @@ let defined = false;
 export class BeDetailOriented extends EventTarget implements Actions {
     async defineExpander(pp: PP, mold: PPE): Promise<PPE> {
         const {summaryElSelector, self} = pp;
+        if(self.id === ''){
+            self.id = crypto.randomUUID();
+        }
         const summaryEl = self.querySelector(summaryElSelector!);
         if(summaryEl === null) throw {msg: '404', summaryElSelector};
         let instance: Element | undefined;
@@ -22,6 +25,7 @@ export class BeDetailOriented extends EventTarget implements Actions {
         }else{
             instance = document.createElement('be-detail-oriented-toggle');
         }
+        instance.setAttribute('aria-owns', self.id);
         summaryEl.appendChild(instance!);
         const {inject} = await import('be-decorated/inject.js');
         inject({mold, tbdSlots: {
@@ -59,7 +63,7 @@ define<Proxy & BeDecoratedProps<Proxy, Actions>, Actions>({
             virtualProps: ['expanderMarkup', 'summaryElSelector'],
             proxyPropDefaults: {
                 expanderMarkup: String.raw `
-<be-detail-oriented-toggle t-a-i-l-b be-definitive='{
+<be-detail-oriented-toggle aria-owns= t-a-i-l-b be-definitive='{
     "config": {
         "propDefaults": {
             "expanded": false,
@@ -85,7 +89,10 @@ define<Proxy & BeDecoratedProps<Proxy, Actions>, Actions>({
             "expanded": {
                 "notify": {
                     "negateTo": "collapsed",
-                    "dispatch": true
+                    "dispatch": true,
+                    "reflectTo": {
+                        "aria": "expanded"
+                    }
                 }
             }
         }

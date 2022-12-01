@@ -1,6 +1,6 @@
 # be-detail-oriented
 
-Make the fieldset and possibly other built-in elements expandable, similar to the detail element.
+Make the fieldset and possibly other built-in elements expandable, similar to the details element.
 
 [![Playwright Tests](https://github.com/bahrus/be-detail-oriented/actions/workflows/CI.yml/badge.svg?branch=baseline)](https://github.com/bahrus/be-detail-oriented/actions/workflows/CI.yml)
 [![NPM version](https://badge.fury.io/js/be-detail-oriented.png)](http://badge.fury.io/js/be-detail-oriented)
@@ -39,7 +39,7 @@ If not using be-detail-oriented as a template instantiation plugin, to avoid FOU
 
 ## Customizability
 
-A number of configuration settings are available to allow customizing how the decorated goes about making itself expandable.
+A number of configuration settings are available to allow customizing how the decorator goes about making itself expandable.
 
 ```html
 <form>
