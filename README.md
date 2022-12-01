@@ -73,6 +73,8 @@ is shorthand for:
 
 Meaning, by default, the decorator selects the first child element it finds within, and appends the expander / collapser web component to it, and hides the rest.
 
+This web component relies on Declarative shadow DOM.
+
 ## Viewing Locally
 
 1.  Install git.
