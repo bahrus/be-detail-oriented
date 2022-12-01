@@ -9,7 +9,7 @@
 		"watch": true
 	},
 	"files":[
-		"be-detail-oriented.ts"
+		"index.ts"
 	],
 	"exclude":[
 		"build",
