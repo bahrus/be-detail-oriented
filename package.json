@@ -28,7 +28,7 @@
     "be-decorated": "0.0.212",
     "be-definitive": "0.0.83",
     "be-hive": "0.0.79",
-    "plus-minus": "0.0.2"
+    "plus-minus": "0.0.3"
   },
   "devDependencies": {
     "may-it-serve": "0.0.4",
