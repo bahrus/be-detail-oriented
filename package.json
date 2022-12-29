@@ -25,10 +25,10 @@
     "package-check": "package-check"
   },
   "dependencies": {
-    "be-decorated": "0.0.212",
-    "be-definitive": "0.0.83",
+    "be-decorated": "0.0.213",
+    "be-definitive": "0.0.84",
     "be-hive": "0.0.79",
-    "plus-minus": "0.0.3"
+    "plus-minus": "0.0.4"
   },
   "devDependencies": {
     "may-it-serve": "0.0.4",

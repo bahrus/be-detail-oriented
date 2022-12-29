@@ -29,6 +29,7 @@ export class BeDetailOriented extends EventTarget implements Actions {
     }
 
     toggleExpander(pp: ProxyProps, e?: CustomEvent): void {
+        console.log('toggleExpander');
         const {self, summaryElSelector} = pp;
         const {children} = self;
         const val = e?.detail.value;
