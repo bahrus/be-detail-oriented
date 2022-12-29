@@ -2,7 +2,7 @@ import {BeDecoratedProps, MinimalProxy, EventConfigs} from 'be-decorated/types';
 import {MatchRHS, Scope} from 'trans-render/lib/types';
 
 export interface EndUserProps {
-    expanderMarkup?: string,
+    expanderMarkup?: string | HTMLTemplateElement,
     summaryElSelector?: string,
     expanderPlacement?: 'left' | 'right',
 }

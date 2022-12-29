@@ -12,11 +12,13 @@ export class BeDetailOriented extends EventTarget {
         const summaryEl = self.querySelector(summaryElSelector);
         if (summaryEl === null)
             throw { msg: '404', summaryElSelector };
-        const { expanderMarkup } = pp;
-        const fragment = new DOMParser().parseFromString(expanderMarkup, 'text/html', {
-            includeShadowRoots: true
-        });
-        const instance = fragment.body.firstChild;
+        const templ = this.#sanitize(pp);
+        const fragment = templ.content.cloneNode(true);
+        const plusMinus = fragment.querySelector('plus-minus');
+        if (plusMinus !== null) {
+            plusMinus.setAttribute('be-importing', "plus-minus/plus-minus.html");
+        }
+        const instance = fragment.firstElementChild;
         instance.setAttribute('aria-owns', self.id);
         const verb = expanderPlacement === 'left' ? 'prepend' : 'appendChild';
         summaryEl[verb](instance);
@@ -25,6 +27,27 @@ export class BeDetailOriented extends EventTarget {
                 of: instance
             } });
         return mold;
+    }
+    #sanitize(pp) {
+        let { expanderMarkup } = pp;
+        if (expanderMarkup instanceof HTMLTemplateElement)
+            return expanderMarkup;
+        if (typeof Sanitizer !== undefined) {
+            const sanitizer = new Sanitizer({
+                allowCustomElements: true,
+                allowElements: ['plus-minus'],
+                allowAttributes: {
+                    "data-be-importing": ["plus-minus"]
+                }
+            });
+            expanderMarkup = sanitizer.sanitizeFor('template', expanderMarkup);
+        }
+        else {
+            const templ = document.createElement('template');
+            templ.innerHTML = expanderMarkup;
+            expanderMarkup = templ;
+        }
+        return expanderMarkup;
     }
     toggleExpander(pp, e) {
         const { self, summaryElSelector } = pp;

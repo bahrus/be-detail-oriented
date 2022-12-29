@@ -15,11 +15,13 @@ export class BeDetailOriented extends EventTarget implements Actions {
         }
         const summaryEl = self.querySelector(summaryElSelector!);
         if(summaryEl === null) throw {msg: '404', summaryElSelector};
-        const {expanderMarkup} = pp;
-        const fragment = (new DOMParser() as any).parseFromString(expanderMarkup, 'text/html', {
-            includeShadowRoots: true
-        }) as Document;
-        const instance = fragment.body.firstChild as Element;
+        const templ = this.#sanitize(pp);
+        const fragment = templ.content.cloneNode(true) as DocumentFragment;
+        const plusMinus = fragment.querySelector('plus-minus');
+        if(plusMinus !== null){
+            plusMinus.setAttribute('be-importing', "plus-minus/plus-minus.html");
+        }
+        const instance = fragment.firstElementChild!;
         instance.setAttribute('aria-owns', self.id);
         const verb = expanderPlacement === 'left' ? 'prepend' : 'appendChild';
         (<any>summaryEl)[verb](instance);
@@ -28,6 +30,26 @@ export class BeDetailOriented extends EventTarget implements Actions {
             of: instance
         }});
         return mold;
+    }
+
+    #sanitize(pp: PP): HTMLTemplateElement{
+        let {expanderMarkup} = pp;
+        if(expanderMarkup instanceof HTMLTemplateElement) return expanderMarkup;
+        if(typeof Sanitizer !== undefined){
+            const sanitizer = new Sanitizer({
+                allowCustomElements: true, 
+                allowElements: ['plus-minus'],
+                allowAttributes: {
+                    "data-be-importing": ["plus-minus"]
+                }
+            });
+            expanderMarkup = sanitizer.sanitizeFor('template', expanderMarkup) as HTMLTemplateElement;
+        }else{
+            const templ = document.createElement('template');
+            templ.innerHTML = expanderMarkup!;
+            expanderMarkup = templ;
+        }
+        return expanderMarkup;
     }
 
     toggleExpander(pp: ProxyProps, e?: CustomEvent): void {
