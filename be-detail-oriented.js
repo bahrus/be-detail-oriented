@@ -26,7 +26,6 @@ export class BeDetailOriented extends EventTarget {
         return mold;
     }
     toggleExpander(pp, e) {
-        console.log('toggleExpander');
         const { self, summaryElSelector } = pp;
         const { children } = self;
         const val = e?.detail.value;
