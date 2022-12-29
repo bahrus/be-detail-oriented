@@ -1,6 +1,7 @@
 import {define, BeDecoratedProps} from 'be-decorated/DE.js';
 import {Actions, VirtualProps, Proxy, PP, ProxyProps, PA, PPE} from './types';
 import {register} from 'be-hive/register.js';
+declare const Sanitizer: any;
 
 const templLookup = new Map<string, HTMLTemplateElement>();
 
@@ -8,7 +9,7 @@ export class BeDetailOriented extends EventTarget implements Actions {
     async defineExpander(pp: PP, mold: PPE): Promise<PPE> {
         import('be-definitive/be-definitive.js');
         import('be-importing/be-importing.js');
-        const {summaryElSelector, self} = pp;
+        const {summaryElSelector, self, expanderPlacement} = pp;
         if(self.id === ''){
             self.id = crypto.randomUUID();
         }
@@ -20,7 +21,8 @@ export class BeDetailOriented extends EventTarget implements Actions {
         }) as Document;
         const instance = fragment.body.firstChild as Element;
         instance.setAttribute('aria-owns', self.id);
-        summaryEl.appendChild(instance!);
+        const verb = expanderPlacement === 'left' ? 'prepend' : 'appendChild';
+        (<any>summaryEl)[verb](instance);
         const {inject} = await import('be-decorated/inject.js');
         inject({mold, tbdSlots: {
             of: instance
@@ -54,9 +56,10 @@ define<Proxy & BeDecoratedProps<Proxy, Actions>, Actions>({
     config: {
         tagName,
         propDefaults:{
-            virtualProps: ['expanderMarkup', 'summaryElSelector'],
+            virtualProps: ['expanderMarkup', 'summaryElSelector', 'expanderPlacement'],
             proxyPropDefaults: {
                 expanderMarkup: String.raw `<plus-minus be-importing=plus-minus/plus-minus.html></plus-minus>`,
+                expanderPlacement: 'left',
                 summaryElSelector: '*',
             }
         },

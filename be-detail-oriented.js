@@ -5,7 +5,7 @@ export class BeDetailOriented extends EventTarget {
     async defineExpander(pp, mold) {
         import('be-definitive/be-definitive.js');
         import('be-importing/be-importing.js');
-        const { summaryElSelector, self } = pp;
+        const { summaryElSelector, self, expanderPlacement } = pp;
         if (self.id === '') {
             self.id = crypto.randomUUID();
         }
@@ -18,7 +18,8 @@ export class BeDetailOriented extends EventTarget {
         });
         const instance = fragment.body.firstChild;
         instance.setAttribute('aria-owns', self.id);
-        summaryEl.appendChild(instance);
+        const verb = expanderPlacement === 'left' ? 'prepend' : 'appendChild';
+        summaryEl[verb](instance);
         const { inject } = await import('be-decorated/inject.js');
         inject({ mold, tbdSlots: {
                 of: instance
@@ -49,9 +50,10 @@ define({
     config: {
         tagName,
         propDefaults: {
-            virtualProps: ['expanderMarkup', 'summaryElSelector'],
+            virtualProps: ['expanderMarkup', 'summaryElSelector', 'expanderPlacement'],
             proxyPropDefaults: {
                 expanderMarkup: String.raw `<plus-minus be-importing=plus-minus/plus-minus.html></plus-minus>`,
+                expanderPlacement: 'left',
                 summaryElSelector: '*',
             }
         },

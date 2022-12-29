@@ -4,6 +4,7 @@ import {MatchRHS, Scope} from 'trans-render/lib/types';
 export interface EndUserProps {
     expanderMarkup?: string,
     summaryElSelector?: string,
+    expanderPlacement?: 'left' | 'right',
 }
 
 export interface VirtualProps extends EndUserProps, MinimalProxy {
