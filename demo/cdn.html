@@ -7,23 +7,26 @@
     <title>Document</title>
 </head>
 <body>
-    <form>
-        <fieldset be-detail-oriented>
-            <legend>legend content</legend>
-            <div>
-                <label>test</label><input>
-            </div>
-        </fieldset>
-
-        <fieldset be-detail-oriented>
-            <legend>legend content</legend>
-            <div>
-                <label>test</label><input>
-            </div>
-        </fieldset>
-    </form>
+    <script nomodule be-having='{
+        "make":{
+            "fieldset": {
+                "be": "detail-oriented"
+            }
+        }
+    }'>
+    </script>
+    <div be-written=./fieldset.html></div>
+    <script type=importmap>
+    {
+        "imports": {
+            "plus-minus/": "../node_modules/plus-minus/"
+        }
+    }
+    </script>
     <script type=module>
-        import 'https://esm.run/be-detail-oriented@0.0.6';
+        import 'https://esm.run/be-detail-oriented@0.0.10';
+        import 'https://esm.run/be-written@0.0.19';
+        import 'https://esm.run/be-having@0.0.10';
     </script>
 </body>
 </html>
