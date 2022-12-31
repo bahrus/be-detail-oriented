@@ -9,7 +9,8 @@
     "./be-detail-oriented.js": "./be-detail-oriented.js"
   },
   "files": [
-    "*.*"
+    "*.*",
+    "demo/*.*"
   ],
   "types": "types.d.ts",
   "keywords": [
