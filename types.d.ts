@@ -2,9 +2,9 @@ import {BeDecoratedProps, MinimalProxy, EventConfigs} from 'be-decorated/types';
 import {MatchRHS, Scope} from 'trans-render/lib/types';
 
 export interface EndUserProps {
-    expanderMarkup?: string | HTMLTemplateElement,
     summaryElSelector?: string,
     expanderPlacement?: 'left' | 'right',
+    plusMinusFrom?: string,
 }
 
 export interface VirtualProps extends EndUserProps, MinimalProxy {
