@@ -36,7 +36,7 @@ export class BeDetailOriented extends EventTarget implements Actions {
     }
 
     modifyVisibility(pp: ProxyProps): void {
-        const {self, open, summaryElSelector} = pp;
+        const {self, open, summaryElSelector, openCss, openPart} = pp;
         const {children} = self;
         const summaryEl = self.querySelector(summaryElSelector!);
         for(const child of children){
@@ -48,6 +48,9 @@ export class BeDetailOriented extends EventTarget implements Actions {
             }
             
         } 
+        const verb = open ? 'add' : 'remove';
+        self.classList[verb](openCss!);
+        self.part[verb](openPart!);
     }
 }
 
@@ -61,9 +64,11 @@ define<Proxy & BeDecoratedProps<Proxy, Actions>, Actions>({
         propDefaults:{
             upgrade,
             ifWantsToBe,
-            virtualProps: ['summaryElSelector', 'expanderPlacement', 'plusMinusFrom'],
+            virtualProps: ['summaryElSelector', 'expanderPlacement', 'plusMinusFrom', 'openCss', 'openPart'],
             proxyPropDefaults: {
                 open: false,
+                openCss: 'detail-oriented-open',
+                openPart: 'detail-oriented-open',
                 expanderPlacement: 'left',
                 summaryElSelector: '*',
                 plusMinusFrom: 'plus-minus/plus-minus.html'

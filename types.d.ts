@@ -6,6 +6,8 @@ export interface EndUserProps {
     expanderPlacement?: 'left' | 'right',
     plusMinusFrom?: string,
     open?: boolean,
+    openCss?: string,
+    openPart?: string,
 }
 
 export interface VirtualProps extends EndUserProps, MinimalProxy {
