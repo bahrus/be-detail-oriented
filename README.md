@@ -20,6 +20,8 @@ Make the fieldset and possibly other built-in elements expandable, similar to th
 </form>
 ```
 
+## [Demo](https://codepen.io/bahrus/pen/gOjMOGj)
+
 ## Avoiding FOUC
 
 If not using be-detail-oriented as a template instantiation plugin, to avoid FOUC, set the hidden attribute to elements inside reflecting the initial state:
