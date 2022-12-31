@@ -7,26 +7,29 @@
     <title>Document</title>
 </head>
 <body>
+    <style>
+        details>:not(summary){
+            margin-left:20px;
+            display:flex;
+            flex-direction:column;
+        }
 
-    <form>
-        <fieldset be-detail-oriented>
-            <legend>legend content</legend>
-            <div>
-                <label>test</label><input>
-            </div>
-        </fieldset>
-
-        <fieldset be-detail-oriented>
-            <legend>legend content</legend>
-            <div>
-                <label>test</label><input>
-            </div>
-        </fieldset>
-    </form>
+    </style>
+    <script nomodule be-having='{
+        "make":{
+            "fieldset": {
+                "be": "detail-oriented"
+            }
+        }
+    }'>
+    </script>
+    <div be-written=./fieldset.html></div>
+    
 
     <script type=importmap>
         {
             "imports": {
+                "be-active/": "../node_modules/be-active/",
                 "be-based/": "../node_modules/be-based/",
                 "be-decorated/": "../node_modules/be-decorated/",
                 "be-definitive/": "../node_modules/be-definitive/",
@@ -34,16 +37,21 @@
                 "be-having/": "../node_modules/be-having/",
                 "be-hive/": "../node_modules/be-hive/",
                 "be-importing/": "../node_modules/be-importing/",
+                "be-observant/": "../node_modules/be-observant/",
                 "be-written/": "../node_modules/be-written/",
                 "plus-minus/": "../node_modules/plus-minus/",
                 "stream-orator/": "../node_modules/stream-orator/",
                 "trans-render/": "../node_modules/trans-render/",
-                "xtal-element/": "../node_modules/xtal-element/"
+                "xtal-element/": "../node_modules/xtal-element/",
+                "xtal-side-nav/": "../node_modules/xtal-side-nav/"
             }
         }
     </script>
     <script type=module>
         import '../be-detail-oriented.js';
+        import 'be-having/be-having.js';
+        import 'be-written/be-written.js';
     </script>
+
 </body>
 </html>

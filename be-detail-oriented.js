@@ -73,6 +73,8 @@ define({
     config: {
         tagName,
         propDefaults: {
+            upgrade,
+            ifWantsToBe,
             virtualProps: ['expanderMarkup', 'summaryElSelector', 'expanderPlacement'],
             proxyPropDefaults: {
                 expanderMarkup: String.raw `<plus-minus be-importing=plus-minus/plus-minus.html></plus-minus>`,
