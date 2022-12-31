@@ -27,22 +27,27 @@ export class BeDetailOriented extends EventTarget implements Actions {
     }
 
 
+    toggleExpander(pp: ProxyProps, e?: CustomEvent): PA {
+        const open = e?.detail.value;
+        return {
+            open
+        }
+        
+    }
 
-    toggleExpander(pp: ProxyProps, e?: CustomEvent): void {
-        const {self, summaryElSelector} = pp;
+    modifyVisibility(pp: ProxyProps): void {
+        const {self, open, summaryElSelector} = pp;
         const {children} = self;
-        const val = e?.detail.value;
         const summaryEl = self.querySelector(summaryElSelector!);
         for(const child of children){
             if(child === summaryEl) continue;
-            if(val){
+            if(open){
                 (<any>child).hidden = false;
             }else{
                 (<any>child).hidden = 'until-found';
             }
             
         } 
-        
     }
 }
 
@@ -58,10 +63,12 @@ define<Proxy & BeDecoratedProps<Proxy, Actions>, Actions>({
             ifWantsToBe,
             virtualProps: ['summaryElSelector', 'expanderPlacement', 'plusMinusFrom'],
             proxyPropDefaults: {
+                open: false,
                 expanderPlacement: 'left',
                 summaryElSelector: '*',
                 plusMinusFrom: 'plus-minus/plus-minus.html'
-            }
+            },
+            emitEvents: ['open']
         },
         actions:{
             defineExpander: {
@@ -74,6 +81,9 @@ define<Proxy & BeDecoratedProps<Proxy, Actions>, Actions>({
                         doInit: true,
                     }}
                 ]
+            },
+            modifyVisibility: {
+                ifKeyIn: ['open']
             }
         }
     },

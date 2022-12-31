@@ -23,14 +23,19 @@ export class BeDetailOriented extends EventTarget {
         return mold;
     }
     toggleExpander(pp, e) {
-        const { self, summaryElSelector } = pp;
+        const open = e?.detail.value;
+        return {
+            open
+        };
+    }
+    modifyVisibility(pp) {
+        const { self, open, summaryElSelector } = pp;
         const { children } = self;
-        const val = e?.detail.value;
         const summaryEl = self.querySelector(summaryElSelector);
         for (const child of children) {
             if (child === summaryEl)
                 continue;
-            if (val) {
+            if (open) {
                 child.hidden = false;
             }
             else {
@@ -50,10 +55,12 @@ define({
             ifWantsToBe,
             virtualProps: ['summaryElSelector', 'expanderPlacement', 'plusMinusFrom'],
             proxyPropDefaults: {
+                open: false,
                 expanderPlacement: 'left',
                 summaryElSelector: '*',
                 plusMinusFrom: 'plus-minus/plus-minus.html'
-            }
+            },
+            emitEvents: ['open']
         },
         actions: {
             defineExpander: {
@@ -66,6 +73,9 @@ define({
                             doInit: true,
                         } }
                 ]
+            },
+            modifyVisibility: {
+                ifKeyIn: ['open']
             }
         }
     },

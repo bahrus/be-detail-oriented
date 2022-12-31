@@ -5,6 +5,7 @@ export interface EndUserProps {
     summaryElSelector?: string,
     expanderPlacement?: 'left' | 'right',
     plusMinusFrom?: string,
+    open?: boolean,
 }
 
 export interface VirtualProps extends EndUserProps, MinimalProxy {
@@ -26,6 +27,8 @@ export type PPE = [PA | undefined, EventConfigs<Proxy, Actions>];
 export interface Actions{
     defineExpander(pp: PP, returnObjMold: PPE): Promise<PPE>;
 
-    toggleExpander(pp: PP, e?: CustomEvent): void;
+    toggleExpander(pp: PP, e?: CustomEvent): PA;
+
+    modifyVisibility(pp: PP): void;
 }
 
