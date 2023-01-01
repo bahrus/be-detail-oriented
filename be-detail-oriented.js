@@ -9,15 +9,24 @@ export class BeDetailOriented extends EventTarget {
         const summaryEl = self.querySelector(summaryElSelector);
         if (summaryEl === null)
             throw { msg: '404', summaryElSelector };
-        const plusMinus = document.createElement('plus-minus');
-        plusMinus.setAttribute('be-importing', plusMinusFrom);
+        let plusMinus = summaryEl.querySelector('plus-minus');
+        let alreadyExisted = true;
+        if (plusMinus === null) {
+            plusMinus = document.createElement('plus-minus');
+            alreadyExisted = false;
+        }
+        if (customElements.get('plus-minus') === undefined) {
+            plusMinus.setAttribute('be-importing', plusMinusFrom);
+        }
         if (self.id === '') {
             self.id = crypto.randomUUID();
         }
         plusMinus.setAttribute('aria-owns', self.id);
         this.#plusMinus = new WeakRef(plusMinus);
-        const verb = expanderPlacement === 'left' ? 'prepend' : 'appendChild';
-        summaryEl[verb](plusMinus);
+        if (!alreadyExisted) {
+            const verb = expanderPlacement === 'left' ? 'prepend' : 'appendChild';
+            summaryEl[verb](plusMinus);
+        }
         const { inject } = await import('be-decorated/inject.js');
         inject({ mold, tbdSlots: {
                 of: plusMinus
