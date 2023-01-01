@@ -1,6 +1,7 @@
 import { define } from 'be-decorated/DE.js';
 import { register } from 'be-hive/register.js';
 export class BeDetailOriented extends EventTarget {
+    #plusMinus;
     async defineExpander(pp, mold) {
         import('be-definitive/be-definitive.js');
         import('be-importing/be-importing.js');
@@ -14,6 +15,7 @@ export class BeDetailOriented extends EventTarget {
             self.id = crypto.randomUUID();
         }
         plusMinus.setAttribute('aria-owns', self.id);
+        this.#plusMinus = new WeakRef(plusMinus);
         const verb = expanderPlacement === 'left' ? 'prepend' : 'appendChild';
         summaryEl[verb](plusMinus);
         const { inject } = await import('be-decorated/inject.js');
@@ -30,6 +32,12 @@ export class BeDetailOriented extends EventTarget {
     }
     modifyVisibility(pp) {
         const { self, open, summaryElSelector, openCss, openPart } = pp;
+        if (this.#plusMinus !== undefined) {
+            const plusMinus = this.#plusMinus.deref();
+            if (plusMinus !== undefined) {
+                plusMinus.expanded = open;
+            }
+        }
         const { children } = self;
         const summaryEl = self.querySelector(summaryElSelector);
         for (const child of children) {
