@@ -21,21 +21,22 @@
     "until-found"
   ],
   "scripts": {
-    "test": "playwright test",
     "serve": "node node_modules/may-it-serve/serve.js",
-    "package-check": "package-check",
-    "safari": "npx playwright wk http://localhost:3030"
+    "test": "playwright test",
+    "safari": "npx playwright wk http://localhost:3030",
+    "update": "ncu -u && npm install"
   },
   "dependencies": {
-    "be-decorated": "0.0.217",
-    "be-definitive": "0.0.87",
-    "be-hive": "0.0.79",
-    "plus-minus": "0.0.8"
+    "be-enhanced": "0.0.37",
+    "be-hive": "0.0.116",
+    "plus-minus": "0.0.8",
+    "trans-render": "0.0.700",
+    "xtal-element": "0.0.575"
+    
   },
   "devDependencies": {
-    "may-it-serve": "0.0.4",
-    "@playwright/test": "1.29.1",
-    "@skypack/package-check": "0.2.2"
+    "@playwright/test": "1.36.2",
+    "may-it-serve": "0.0.5"
   },
   "repository": {
     "type": "git",
