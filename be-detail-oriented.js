@@ -1,12 +1,18 @@
-import { define } from 'be-decorated/DE.js';
+import { BE, propDefaults } from 'be-enhanced/BE.js';
+import { XE } from 'xtal-element/XE.js';
 import { register } from 'be-hive/register.js';
-export class BeDetailOriented extends EventTarget {
+export class BeDetailOriented extends BE {
+    static get beConfig() {
+        return {
+            parse: true,
+        };
+    }
     #plusMinus;
-    async defineExpander(pp, mold) {
+    async defineExpander(self) {
         import('be-definitive/be-definitive.js');
         import('be-importing/be-importing.js');
-        const { summaryElSelector, self, expanderPlacement, plusMinusFrom } = pp;
-        const summaryEl = self.querySelector(summaryElSelector);
+        const { summaryElSelector, enhancedElement, expanderPlacement, plusMinusFrom } = self;
+        const summaryEl = enhancedElement.querySelector(summaryElSelector);
         if (summaryEl === null)
             throw { msg: '404', summaryElSelector };
         let plusMinus = summaryEl.querySelector('plus-minus');
@@ -18,37 +24,46 @@ export class BeDetailOriented extends EventTarget {
         if (customElements.get('plus-minus') === undefined) {
             plusMinus.setAttribute('be-importing', plusMinusFrom);
         }
-        if (self.id === '') {
-            self.id = crypto.randomUUID();
+        if (enhancedElement.id === '') {
+            enhancedElement.id = crypto.randomUUID();
         }
-        plusMinus.setAttribute('aria-owns', self.id);
+        plusMinus.setAttribute('aria-owns', enhancedElement.id);
         this.#plusMinus = new WeakRef(plusMinus);
         if (!alreadyExisted) {
             const verb = expanderPlacement === 'left' ? 'prepend' : 'appendChild';
             summaryEl[verb](plusMinus);
         }
-        const { inject } = await import('be-decorated/inject.js');
-        inject({ mold, tbdSlots: {
-                of: plusMinus
-            } });
-        return mold;
+        return [{
+                resolved: true
+            }, {
+                toggleExpander: {
+                    on: 'expanded-changed',
+                    of: plusMinus,
+                    doInit: true,
+                }
+            }];
+        // const {inject} = await import('be-decorated/inject.js');
+        // inject({mold, tbdSlots: {
+        //     of: plusMinus
+        // }});
+        // return mold;
     }
-    toggleExpander(pp, e) {
+    toggleExpander(self, e) {
         const open = e?.detail.value;
         return {
             open
         };
     }
-    modifyVisibility(pp) {
-        const { self, open, summaryElSelector, openCss, openPart } = pp;
+    modifyVisibility(self) {
+        const { enhancedElement, open, summaryElSelector, openCss, openPart } = self;
         if (this.#plusMinus !== undefined) {
             const plusMinus = this.#plusMinus.deref();
             if (plusMinus !== undefined) {
                 plusMinus.expanded = open;
             }
         }
-        const { children } = self;
-        const summaryEl = self.querySelector(summaryElSelector);
+        const { children } = enhancedElement;
+        const summaryEl = enhancedElement.querySelector(summaryElSelector);
         for (const child of children) {
             if (child === summaryEl)
                 continue;
@@ -60,49 +75,21 @@ export class BeDetailOriented extends EventTarget {
             }
         }
         const verb = open ? 'add' : 'remove';
-        self.classList[verb](openCss);
-        self.part[verb](openPart);
+        enhancedElement.classList[verb](openCss);
+        enhancedElement.part[verb](openPart);
     }
 }
 const tagName = 'be-detail-oriented';
 const ifWantsToBe = 'detail-oriented';
 const upgrade = '*';
-define({
+const xe = new XE({
     config: {
         tagName,
         propDefaults: {
-            upgrade,
-            ifWantsToBe,
-            virtualProps: ['summaryElSelector', 'expanderPlacement', 'plusMinusFrom', 'openCss', 'openPart'],
-            proxyPropDefaults: {
-                open: false,
-                openCss: 'detail-oriented-open',
-                openPart: 'detail-oriented-open',
-                expanderPlacement: 'left',
-                summaryElSelector: '*',
-                plusMinusFrom: 'plus-minus/plus-minus.html'
-            },
-            emitEvents: ['open']
+            ...propDefaults
         },
-        actions: {
-            defineExpander: {
-                ifAllOf: ['summaryElSelector'],
-                returnObjMold: [
-                    { resolved: true },
-                    { toggleExpander: {
-                            on: 'expanded-changed',
-                            of: "tbd",
-                            doInit: true,
-                        } }
-                ]
-            },
-            modifyVisibility: {
-                ifKeyIn: ['open']
-            }
-        }
+        actions: {}
     },
-    complexPropDefaults: {
-        controller: BeDetailOriented
-    }
+    superclass: BeDetailOriented
 });
 register(ifWantsToBe, upgrade, tagName);
