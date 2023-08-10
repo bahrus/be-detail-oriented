@@ -3,6 +3,7 @@ import {BEConfig} from 'be-enhanced/types';
 import {XE} from 'xtal-element/XE.js';
 import {Actions, AllProps, AP, PAP, ProPAP, POA, ProPOA} from './types';
 import {register} from 'be-hive/register.js';
+import {AP as beImpAP} from 'be-importing/types';
 
 export class BeDetailOriented extends BE<AP, Actions> implements Actions{
     static override get beConfig(){
@@ -25,9 +26,10 @@ export class BeDetailOriented extends BE<AP, Actions> implements Actions{
             alreadyExisted = false;     
         }
         if(customElements.get('plus-minus') === undefined){
-            plusMinus.setAttribute('be-importing', plusMinusFrom!);
+            const pm = await (<any>plusMinus).beEnhanced.whenDefined('be-importing') as beImpAP;
+            pm.from = plusMinusFrom;
+            //plusMinus.setAttribute('be-importing', plusMinusFrom!);
         }
-        
         if(enhancedElement.id === ''){
             enhancedElement.id = crypto.randomUUID(); 
         }
@@ -96,10 +98,27 @@ const xe = new XE<AP, Actions>({
     config:{
         tagName,
         propDefaults:{
-            ...propDefaults
+            ...propDefaults,
+            plusMinusFrom: 'plus-minus/root.html',
+            openCss: 'detail-oriented-open',
+            openPart: 'detail-oriented-open',
+            expanderPlacement: 'left',
+            summaryElSelector: '*',
+            open: false,
+        },
+        propInfo:{
+            ...propInfo,
+            open:{
+                notify:{
+                    dispatchFromEnhancedElement: true,
+                }
+            }
         },
         actions:{
-
+            defineExpander: 'summaryElSelector',
+            modifyVisibility:{
+                ifKeyIn: ['open'],
+            }
         }
     },
     superclass: BeDetailOriented

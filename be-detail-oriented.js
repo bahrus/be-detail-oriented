@@ -1,4 +1,4 @@
-import { BE, propDefaults } from 'be-enhanced/BE.js';
+import { BE, propDefaults, propInfo } from 'be-enhanced/BE.js';
 import { XE } from 'xtal-element/XE.js';
 import { register } from 'be-hive/register.js';
 export class BeDetailOriented extends BE {
@@ -22,7 +22,9 @@ export class BeDetailOriented extends BE {
             alreadyExisted = false;
         }
         if (customElements.get('plus-minus') === undefined) {
-            plusMinus.setAttribute('be-importing', plusMinusFrom);
+            const pm = await plusMinus.beEnhanced.whenDefined('be-importing');
+            pm.from = plusMinusFrom;
+            //plusMinus.setAttribute('be-importing', plusMinusFrom!);
         }
         if (enhancedElement.id === '') {
             enhancedElement.id = crypto.randomUUID();
@@ -86,9 +88,28 @@ const xe = new XE({
     config: {
         tagName,
         propDefaults: {
-            ...propDefaults
+            ...propDefaults,
+            plusMinusFrom: 'plus-minus/root.html',
+            openCss: 'detail-oriented-open',
+            openPart: 'detail-oriented-open',
+            expanderPlacement: 'left',
+            summaryElSelector: '*',
+            open: false,
         },
-        actions: {}
+        propInfo: {
+            ...propInfo,
+            open: {
+                notify: {
+                    dispatchFromEnhancedElement: true,
+                }
+            }
+        },
+        actions: {
+            defineExpander: 'summaryElSelector',
+            modifyVisibility: {
+                ifKeyIn: ['open'],
+            }
+        }
     },
     superclass: BeDetailOriented
 });
