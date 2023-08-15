@@ -1,6 +1,6 @@
 {
   "name": "be-detail-oriented",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "Make the fieldset and possibly other built-in elements expandable, similar to the detail element.",
   "main": "be-detail-oriented.js",
   "module": "be-detail-oriented.js",
@@ -32,7 +32,6 @@
     "plus-minus": "0.0.9",
     "trans-render": "0.0.702",
     "xtal-element": "0.0.577"
-    
   },
   "devDependencies": {
     "@playwright/test": "1.37.0",
