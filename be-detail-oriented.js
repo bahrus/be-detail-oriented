@@ -15,26 +15,29 @@ export class BeDetailOriented extends BE {
         const summaryEl = enhancedElement.querySelector(summaryElSelector);
         if (summaryEl === null)
             throw { msg: '404', summaryElSelector };
+        if (customElements.get('plus-minus') === undefined) {
+            //TODO:  figure out why this is necessary.
+            const plusMinusDefiner = document.createElement('plus-minus');
+            plusMinusDefiner.setAttribute('enh-by-be-importing', plusMinusFrom);
+            plusMinusDefiner.style.display = 'none';
+            document.body.appendChild(plusMinusDefiner);
+        }
+        await customElements.whenDefined('plus-minus');
         let plusMinus = summaryEl.querySelector('plus-minus');
         let alreadyExisted = true;
         if (plusMinus === null) {
             plusMinus = document.createElement('plus-minus');
             alreadyExisted = false;
         }
-        if (customElements.get('plus-minus') === undefined) {
-            const pm = await plusMinus.beEnhanced.whenDefined('be-importing');
-            pm.from = plusMinusFrom;
-            //plusMinus.setAttribute('be-importing', plusMinusFrom!);
+        if (!alreadyExisted) {
+            const verb = expanderPlacement === 'left' ? 'prepend' : 'appendChild';
+            summaryEl[verb](plusMinus);
         }
         if (enhancedElement.id === '') {
             enhancedElement.id = crypto.randomUUID();
         }
         plusMinus.setAttribute('aria-owns', enhancedElement.id);
         this.#plusMinus = new WeakRef(plusMinus);
-        if (!alreadyExisted) {
-            const verb = expanderPlacement === 'left' ? 'prepend' : 'appendChild';
-            summaryEl[verb](plusMinus);
-        }
         return [{
                 resolved: true
             }, {
@@ -44,11 +47,6 @@ export class BeDetailOriented extends BE {
                     doInit: true,
                 }
             }];
-        // const {inject} = await import('be-decorated/inject.js');
-        // inject({mold, tbdSlots: {
-        //     of: plusMinus
-        // }});
-        // return mold;
     }
     toggleExpander(self, e) {
         const open = e?.detail.value;
