@@ -24,7 +24,7 @@ Make the fieldset and possibly other built-in elements expandable, similar to th
 
 ## Avoiding FOUC
 
-If not using be-detail-oriented as a template instantiation plugin, to avoid FOUC, set the hidden attribute to elements inside reflecting the initial state:
+If not using be-detail-oriented as a template instantiation element enhancement, to avoid FOUC, set the hidden attribute to elements inside reflecting the initial state:
 
 ```html
 <form>
@@ -70,7 +70,7 @@ is shorthand for:
 </form>
 ```
 
-Meaning, by default, the decorator selects the first child element it finds within, and appends the plus-minus web component to it, and hides the rest.
+Meaning, by default, this enhancement selects the first child element it finds within, and appends the plus-minus web component to it, and hides the rest.
 
 This web component relies on Declarative shadow DOM.
 
