@@ -39,13 +39,10 @@ If not using be-detail-oriented as a template instantiation plugin, to avoid FOU
 
 > **Note**:  Chrome (at least) seems to have unexpected behavior when it comes to setting hidden programmatically.  In particular, not wrapping inputs and labels inside a div can prevent the hidden attribute from affecting the display, at least if it's set programmatically.  This buggy (?) behavior can be observed in this [demo](https://codepen.io/bahrus/pen/BaVxWzj).
 
-## Template Instantiation Optimization
-
-This package can also be used during [template instantiation](https://github.com/bahrus/trans-render#extending-tr-dtr-horizontally).
 
 ## Customizability
 
-A ~~number of~~ configuration setting~~s~~ ~~are~~ is available to allow customizing how the decorator goes about making itself expandable.
+A ~~number of~~ configuration setting~~s~~ ~~are~~ is available to allow customizing how the enhancement goes about making itself expandable.
 
 ```html
 <form>
