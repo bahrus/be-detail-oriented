@@ -9,8 +9,8 @@ export class BeDetailOriented extends BE {
     }
     #plusMinus;
     async defineExpander(self) {
-        import('be-definitive/be-definitive.js');
-        import('be-importing/be-importing.js');
+        import('xtal-element/xtal-element.js');
+        import('be-importing/behivior.js');
         const { summaryElSelector, enhancedElement, expanderPlacement, plusMinusFrom } = self;
         const summaryEl = enhancedElement.querySelector(summaryElSelector);
         if (summaryEl === null)
@@ -18,7 +18,7 @@ export class BeDetailOriented extends BE {
         if (customElements.get('plus-minus') === undefined) {
             //TODO:  figure out why this is necessary.
             const plusMinusDefiner = document.createElement('plus-minus');
-            plusMinusDefiner.setAttribute('enh-by-be-importing', plusMinusFrom);
+            plusMinusDefiner.setAttribute('enh-be-importing', plusMinusFrom);
             plusMinusDefiner.style.display = 'none';
             document.body.appendChild(plusMinusDefiner);
         }
